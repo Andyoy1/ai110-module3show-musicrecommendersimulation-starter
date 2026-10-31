@@ -10,34 +10,26 @@
 
 **What task did you give the agent?**
 
-<!-- Describe the goal you asked the agent to accomplish -->
+I asked Claude Code to complete the Music Recommender Simulation: add songs to the CSV, implement the loader, scoring, and top-K functions, update `main.py`, run three user profiles plus one weight experiment, write the README and model card, and run the tests.
 
 **Prompts used:**
 
-<!-- Paste the key prompts you gave the agent -->
+One long prompt listing the 10 tasks (expand `songs.csv`, weighted scoring of +2 genre / +1 mood / up to +1 energy, three profiles, one experiment, README, model card, tests) and the constraints (keep starter interfaces, no extra libraries, no invented outputs, no commit or push).
 
 **What did the agent generate or change?**
 
-<!-- List the files edited, code generated, or commands run -->
+- `data/songs.csv`: added 8 songs (ids 11-18)
+- `src/recommender.py`: `load_songs`, `score_song`, `recommend_songs`, and the `Recommender` class methods
+- `src/main.py`: three profiles, baseline and experiment runs, readable output
+- `tests/test_recommender.py`: three added tests
+- `README.md`, `model_card.md`, and this file
 
 **What did you verify or fix manually?**
 
-<!-- Describe anything the agent got wrong or that required human review -->
+<!-- TODO (you): fill this in with what you actually checked or changed, e.g. read the scoring code, re-ran `python -m src.main` and `pytest`, edited the reflection sections in your own words. The agent should not invent this part. -->
 
 ---
 
 ## Design Pattern (SF10)
 
-> Document how AI helped you choose or implement a design pattern.
-
-**Which design pattern did you use?**
-
-<!-- e.g., Strategy, Factory, Observer, etc. -->
-
-**How did AI help you brainstorm or implement it?**
-
-<!-- Describe the conversation or suggestions that led to your decision -->
-
-**How does the pattern appear in your final code?**
-
-<!-- Point to the relevant class or method -->
+<!-- Not attempted. -->

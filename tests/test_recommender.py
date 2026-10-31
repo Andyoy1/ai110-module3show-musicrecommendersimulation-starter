@@ -59,3 +59,31 @@ def test_explain_recommendation_returns_non_empty_string():
     explanation = rec.explain_recommendation(user, song)
     assert isinstance(explanation, str)
     assert explanation.strip() != ""
+
+
+from src.recommender import load_songs, score_song, recommend_songs
+
+
+def test_load_songs_converts_types():
+    songs = load_songs("data/songs.csv")
+    assert len(songs) >= 15
+    assert isinstance(songs[0]["id"], int)
+    assert isinstance(songs[0]["energy"], float)
+
+
+def test_score_song_weights_and_reasons():
+    song = {"genre": "pop", "mood": "happy", "energy": 0.8}
+    score, reasons = score_song({"genre": "pop", "mood": "happy", "energy": 0.8}, song)
+    assert score == 4.0
+    assert len(reasons) == 3
+    score, _ = score_song({"genre": "rock", "mood": "sad", "energy": 0.5}, song)
+    assert abs(score - 0.7) < 1e-9
+
+
+def test_recommend_songs_top_k_sorted():
+    songs = load_songs("data/songs.csv")
+    recs = recommend_songs({"genre": "lofi", "mood": "chill", "energy": 0.4}, songs, k=3)
+    assert len(recs) == 3
+    scores = [r[1] for r in recs]
+    assert scores == sorted(scores, reverse=True)
+    assert recs[0][0]["genre"] == "lofi"
